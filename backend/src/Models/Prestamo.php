@@ -5,7 +5,7 @@ use Raiz\Models\ModelBase;
 use Raiz\Models\Socio;
 
 class Prestamo extends ModelBase{
-    private $id;
+    
     private $socio;
     private $libro;
     private $fecha_desde;
@@ -17,9 +17,9 @@ public function __construct(int $id, Socio $socio, Libro $libro, string $fecha_d
     parent::__construct($id);
     $this->socio = $socio;
     $this->libro = $libro;
-    $this->fecha_desde = date($fecha_desde);
-    $this->fecha_hasta = date($fecha_hasta);
-    $this->fecha_dev = date($fecha_dev);
+    $this->fecha_desde = date_create($fecha_desde);
+    $this->fecha_hasta = date_create($fecha_hasta);
+    $this->fecha_dev = $fecha_dev===null? null : date_create($fecha_dev);
 }
 
 public function setFechaDesde($fecha_desde){
@@ -62,8 +62,8 @@ public function diasRetraso(){
     public function serializar(): array{
         return[
             "id" => $this->getId(),
-            "id_libro" => 
-            "id_socio" =>
+            "libro" => $this->libro->serializar(),
+            "socio" => $this->socio->serializar(),
             "fecha_desde"=>$this->getFechaDesde(),
             "fecha_hasta"=>$this->getFechaHasta(),
             "fecha_dev"=>$this->getFechaDev()
@@ -73,10 +73,10 @@ public function diasRetraso(){
     
     /** @param mixed[] */
     public static function deserializar(array $datos): Self{
-        return new Socio(
+        return new Prestamo(
             id: $datos["id"],
-            id_libro: 
-            id_socio: 
+            libro: $datos["libro"],
+            socio: $datos["socio"],
             fecha_desde: $datos ["fecha_desde"],
             fecha_hasta:  $datos["fecha_hasta"],
             fecha_dev:  $datos["fecha_dev"]

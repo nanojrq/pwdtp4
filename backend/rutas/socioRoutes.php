@@ -45,7 +45,7 @@ $app->put('/apiv1/socios/{id}', function (Request $req, Response $res, array $ar
 
 // ---- Borrar registro existente ---- //
 
-$app->delete('apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
+$app->delete('/apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(SocioController::borrar($args["id"]), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
