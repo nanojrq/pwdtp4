@@ -15,46 +15,17 @@ class LibroController implements InterfaceController{
 
     //Clase que controla de acuerdo a lo que pida la vista: 
     // --- CRUD --- 
-    //  Listar 
-    //  encontrar uno
-    //  crear
-    //  actualizar
-    //  borrar  
+    // Crear
+    // Listar
+    // Actualizar
+    // Borrar
+    // Buscar
 
-    public static function listar(): array
-    {
-        $libros = [];
-        $listadoLibros = LibroDAO::listar();
-     
-        foreach($listadoLibros as $libro){
-        
-            $libros[] = $libro->serializar();
-            
-        }
-        
-        return $libros;
 
-        
-    }
-    
-    public static function encontrarUno(string $id): ?array
-    {
-        $Libro = LibroDAO::encontrarUno($id);
-        if($Libro===null){
-            return $Libro;
-        }else{
-            return $Libro->serializar();
-        }
-        
-        
-        
-    }
-
-    public static function crear(array $parametros): array
-    {
-        $parametros['genero'] = GeneroDAO::encontrarUno($parametros['id_genero']);
-        $parametros['categoria'] = CategoriaDAO::encontrarUno($parametros['id_categoria']);
-        $parametros['editorial']= EditorialDAO::encontrarUno($parametros['id_editorial']);
+    public static function crear(array $parametros): array{
+        $parametros['genero'] = GeneroDAO::encontrarUno($parametros['id']);
+        $parametros['categoria'] = CategoriaDAO::encontrarUno($parametros['id']);
+        $parametros['editorial']= EditorialDAO::encontrarUno($parametros['id']);
         foreach($parametros['autor'] as $autor){
             $parametros[$autor][] = AutorDAO::encontrarUno($autor);
         }
@@ -68,14 +39,25 @@ class LibroController implements InterfaceController{
             anio:$parametros['anio'],
             genero:$parametros['genero'],
             categoria:$parametros["categoria"],
-            
         );
+
         LibroDAO::crear($Libro);
         return $Libro->serializar();
     }
 
-    public static function actualizar(array $parametros): array
-    {
+    public static function listar(): array{
+        $libros = [];
+        $listadoLibros = LibroDAO::listar();
+     
+        foreach($listadoLibros as $libro){
+        
+            $libros[] = $libro->serializar();
+        }
+        
+        return $libros;
+    }
+
+    public static function actualizar(array $parametros): array{
         $Libro = Libro::deserializar($parametros);
         LibroDAO::actualizar($Libro);
         return $Libro->serializar();
@@ -84,19 +66,20 @@ class LibroController implements InterfaceController{
     public function actualizarEstado(array $parametros){
         $Libro = Libro::deserializar($parametros);
         LibroDAO::actualizarEstado($Libro);
-        return $Libro->serializar();
-        
-    }
-
-
-    public static function borrar(string $id):void
-    {
-        LibroDAO::borrar($id);
-        
+        return $Libro->serializar();  
     }
     
-    
+    public static function borrar(string $id):void{
+        LibroDAO::borrar($id);   
+    }
 
-
+    public static function encontrarUno(string $id): ?array{
+        $Libro = LibroDAO::encontrarUno($id);
+        if($Libro===null){
+            return $Libro;
+        }else{
+            return $Libro->serializar();
+        }
+    }
 }
 

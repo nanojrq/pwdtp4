@@ -3,10 +3,9 @@ declare(strict_types=1);
 namespace Raiz\Models;
 
 class Editorial extends ModelBase{
-    private $id;
     private $nombre;
 
-    public function __construct(int $id, string $nombre){
+    public function __construct(?int $id, string $nombre){
         parent::__construct($id);
         $this->nombre = $nombre;
     }

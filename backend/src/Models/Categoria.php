@@ -4,10 +4,9 @@ namespace Raiz\Models;
 use Raiz\Models\ModelBase;
 
 class Categoria extends ModelBase{
-    private $id;
     private $descripcion;
 
-    public function __construct(int $id, string $descripcion){
+    public function __construct(?int $id, string $descripcion){
         parent::__construct($id);
         $this->descripcion = $descripcion;
     }

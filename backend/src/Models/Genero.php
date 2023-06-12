@@ -8,7 +8,7 @@ class Genero extends ModelBase{
     private $descripcion;
     private $activo;
 
-    public function __construct(int $id, string $descripcion, string $activo){
+    public function __construct(?int $id, string $descripcion, string $activo){
         parent::__construct($id);
         $this->descripcion = $descripcion;
         $this->activo = $activo;

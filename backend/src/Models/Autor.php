@@ -3,10 +3,9 @@ declare(strict_types=1);
 namespace Raiz\Models;
 
 class Autor extends ModelBase{
-    private $id;
     private $nombre_apellido;
 
-    public function __construct(int $id, string $nombre_apellido){
+    public function __construct(?int $id, string $nombre_apellido){
         parent::__construct($id);
         $this->nombre_apellido = $nombre_apellido;
     }
