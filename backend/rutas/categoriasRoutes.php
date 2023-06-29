@@ -4,7 +4,7 @@ use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Raiz\Controllers\CategoriaController;
-
+use Raiz\Auxiliares\Utileria;
 
 
 // ---- RUTAS PARA TRABAJAR CON EL CONTROLADOR ---- // 
@@ -29,7 +29,7 @@ $app->get('/apiv1/categorias/{id}', function (Request $req, Response $res, array
 // ---- Crear nuevo regitro ---- //
 
 $app->post('/apiv1/categorias/nuevo', function (Request $req, Response $res, array $args) {
-    var_dump($req->getQueryParams());
+    $request = Utileria::PasarAJson(file_get_contents('php://input'));
     $payload = Json_Encode(CategoriaController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
@@ -37,6 +37,7 @@ $app->post('/apiv1/categorias/nuevo', function (Request $req, Response $res, arr
 
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/categorias/{id}', function (Request $req, Response $res, array $args) {
+    $request = Utileria::PasarAJson(file_get_contents('php://input'));
     $payload = Json_Encode(CategoriaController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");

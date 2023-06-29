@@ -4,6 +4,7 @@ use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Raiz\Controllers\AutorController;
+use Raiz\Auxiliares\Utileria;
 
 
 
@@ -29,7 +30,8 @@ $app->get('/apiv1/autores/{id}', function (Request $req, Response $res, array $a
 // ---- Crear nuevo regitro ---- //
 
 $app->post('/apiv1/autores/nuevo', function (Request $req, Response $res, array $args) {
-    var_dump($req->getQueryParams());
+    //var_dump($req->getQueryParams());
+    $request = Utileria::PasarAJson(file_get_contents('php://input'));
     $payload = Json_Encode(AutorController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
@@ -37,6 +39,7 @@ $app->post('/apiv1/autores/nuevo', function (Request $req, Response $res, array 
 
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/autores/{id}', function (Request $req, Response $res, array $args) {
+    $request = Utileria::PasarAJson(file_get_contents('php://input'));
     $payload = Json_Encode(AutorController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
