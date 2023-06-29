@@ -12,7 +12,7 @@ class PrestamoDAO implements InterfaceDAO
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM prestamo';
+        $sql = 'SELECT * FROM prestamos';
         $listaPrestamos = ConectarBD::leer(sql: $sql);
         $prestamos = [];
         foreach ($listaPrestamos as $prestamo) {
