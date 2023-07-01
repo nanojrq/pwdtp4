@@ -15,7 +15,7 @@ class Socio extends Modelbase{
     public function __construct(?int $id, string $nombre_apellido, ?string $fecha_alta, ?int $activo, int $telefono, string $direccion){
         parent::__construct($id);
         $this->nombre_apellido = $nombre_apellido;
-        $this->fecha_alta = $fecha_alta;
+        $this->fecha_alta = ($fecha_alta);
         $this->activo = $activo;
         $this->telefono = $telefono;
         $this->direccion = $direccion;
@@ -61,10 +61,10 @@ class Socio extends Modelbase{
     /** @return mixed[] */
     public function serializar(): array{
         return[
-            "nombre" => $this->getNombre(),
-            "id_socio" =>$this->getId(),
+            "nombre_apellido" => $this->getNombre(),
+            "id" =>$this->getId(),
             "fecha_alta"=>$this->getFechaAlta(),
-            "es_activo"=>$this->getActivo(),
+            "activo"=>$this->getActivo(),
             "telefono"=>$this->getTelefono(),
             "direccion"=>$this->getDireccion()
         ];

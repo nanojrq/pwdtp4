@@ -131,7 +131,7 @@ export default {
       console.log(res.data);
     },
     borrar(id) {
-      axios.delete('http://127.0.0.1:8000/apiv1/socios/' + id)
+      axios.delete('http://127.0.0.1:8000/apiv1/socios' + id)
         .then((response) => {
           console.log(response)
           if (response.data === null) { alert("socio eliminado") }

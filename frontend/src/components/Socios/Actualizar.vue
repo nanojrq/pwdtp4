@@ -24,12 +24,12 @@ export default {
     methods: {
         async ActualizarSocio(Socio ){
             console.log(Socio);
-                      const res = await axios.put('http://127.0.0.1:8000/apiv1/socios/'+this.$route.params.id, Socio)
+                      const res = await axios.put('http://127.0.0.1:8000/apiv1/socios'+this.$route.params.id, Socio)
                         
             
         },
         async buscar(){
-            const res = await axios.get('http://127.0.0.1:8000/apiv1/socios/'+this.$route.params.id);
+            const res = await axios.get('http://127.0.0.1:8000/apiv1/socios'+this.$route.params.id);
             this.Socio = res.data;
             console.log(this.Socio)
         }
