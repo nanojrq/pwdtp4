@@ -1,30 +1,79 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+<script lang="ts">
+import Footer from "../src/components/Footer.vue";
+import Boton from '../src/components/Boton.vue'
 
+
+export default {
+  components: { Footer, Boton }
+
+}
+</script>
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <body>
+
+    <nav>
+      <div class="logo">
+        <img src="../src/assets/logo_libro.svg" alt="logo">
+        <h2>App Prestamos de Libros</h2>
+      </div>
+    <div>
+      <router-link to="/">Inicio</router-link>
+      <router-link to="/about">acerca de</router-link>
+      <router-link to="/socios">Socios</router-link>
+    </div>
+    </nav>
+ 
+    <section> <router-view></router-view>
+      
+    </section>
+    <Footer></Footer>
+  </body>
 </template>
 
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: content-box;
+
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.logo{
+  padding: 10px;
+  display: flex;
+  align-items: center;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.logo img{
+  padding: 25px;
+  width: 50px;
+  height: 50px;
+}
+
+body {}
+
+nav {
+  top: 0;
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+  justify-content: space-between;
+  height: 10%;
+  background: #079d46;
+  color: aliceblue;
+}
+
+nav a {
+  padding: 20px;
+  text-transform: uppercase;
+  color: antiquewhite;
+}
+nav a:hover {
+  padding: 20px;
+  text-transform: uppercase;
+  color: rgb(158, 211, 0);
+}
+section{
+  height: 85%;
+  padding: 25px;
 }
 </style>

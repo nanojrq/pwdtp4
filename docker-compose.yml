@@ -61,7 +61,7 @@ services:
             - POSTGRES_USER=${DB_USER}
             - POSTGRES_PASSWORD=${DB_PASSWORD}
         ports:
-            - 5433:5432
+            - 5432:5432
         volumes:
             - ./conf/postgres/:/docker-entrypoint-initdb.d/
             - ./data/postgres:/var/lib/postgresql/data:delegated
