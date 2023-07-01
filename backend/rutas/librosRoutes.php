@@ -31,7 +31,7 @@ $app->get('/apiv1/libros/{id}', function (Request $req, Response $res, array $ar
 
 $app->post('/apiv1/libros/nuevo', function (Request $req, Response $res, array $args) {
     $request = Utileria::PasarAJson(file_get_contents('php://input'));
-    $payload = Json_Encode(LibroController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $payload = Json_Encode(LibroController::crear($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
@@ -39,7 +39,7 @@ $app->post('/apiv1/libros/nuevo', function (Request $req, Response $res, array $
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/libros/actualizar/{id}', function (Request $req, Response $res, array $args) {
     $request = Utileria::PasarAJson(file_get_contents('php://input'));
-    $payload = Json_Encode(LibroController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $payload = Json_Encode(LibroController::actualizar($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });

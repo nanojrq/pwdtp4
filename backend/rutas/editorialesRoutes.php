@@ -31,7 +31,7 @@ $app->get('/apiv1/editoriales/{id}', function (Request $req, Response $res, arra
 
 $app->post('/apiv1/editoriales/nuevo', function (Request $req, Response $res, array $args) {
     $request = Utileria::PasarAJson(file_get_contents('php://input'));
-    $payload = Json_Encode(EditorialController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $payload = Json_Encode(EditorialController::crear($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
@@ -39,7 +39,7 @@ $app->post('/apiv1/editoriales/nuevo', function (Request $req, Response $res, ar
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/editoriales/{id}', function (Request $req, Response $res, array $args) {
     $request = Utileria::PasarAJson(file_get_contents('php://input'));
-    $payload = Json_Encode(EditorialController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $payload = Json_Encode(EditorialController::actualizar($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
